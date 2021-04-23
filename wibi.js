@@ -55,6 +55,6 @@ function createClick2ChatWidget(n) {
             var Y = await Q.json();
         }
 
-        v && v.length, window.location.href.search("#OpenClick2Contact") >= 0 && C(), document.getElementById("openButton").onclick = function() { C() }, document.querySelectorAll('.click2Chat div#divContainer a').forEach(button => button.onclick = function(e) { F(e) })
+        v && v.length, window.location.href.search("#OpenClick2Contact") >= 0 && C(), document.getElementById("openButton").onclick = function() { C() }, document.querySelectorAll('.click2Chat div#divContainer a').forEach(button => button.onclick = function(e) { F(e) }) 
     }()
 }
