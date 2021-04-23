@@ -8,7 +8,7 @@ function createClick2ChatWidget(n) {
         v = [];
     !async function() {
         var P = await fetch(`https://us-central1-hubspot-api-developer.cloudfunctions.net/wibi-click-api?id=${n}&c=0`);
-        let B = await P.json();
+        var B = await P.json();
         m = B.name, f = B.designation, e = B.pnumber, t = B.wnumber, o = B.message, _ = B.messenger_url, y = B.color_code, b = B.profile_imgUrl, w = B.email, a = B.subject, i = B.body, c = B.whatsapp_message, p = B.telegram_num, l = B.viber_num, s = B.skype_nameemail, r = B.pnumber_sms, d = B.sms_body, h = B.label, g = B.position, v = B.custom_buttons, x = B.line, u = B.close_label, void 0 === h && (h = "Contact Us"), void 0 !== g && "" !== g || (g = "right");
         var k = document.createElement("div");
 
@@ -47,8 +47,14 @@ function createClick2ChatWidget(n) {
             })
         } catch (n) {}
 
-        async function C() { "none" == document.getElementById("myForm").style.display ? (document.getElementById("myForm").style.display = "block", document.getElementById("openButton__closeIcon").style.display = "block", document.getElementById("openButton__phoneIcon").style.display = "none", document.getElementById("openButton__label").innerText = `${u}`) : (document.getElementById("myForm").style.display = "none", document.getElementById("openButton__closeIcon").style.display = "none", document.getElementById("openButton__phoneIcon").style.display = "block", document.getElementById("openButton__label").innerText = `${h}`); var Q = await fetch(`https://us-central1-hubspot-api-developer.cloudfunctions.net/wibi-click-api?id=${n}&c=1`); let Y = await Q.json(); }
+        async function C() { "none" == document.getElementById("myForm").style.display ? (document.getElementById("myForm").style.display = "block", document.getElementById("openButton__closeIcon").style.display = "block", document.getElementById("openButton__phoneIcon").style.display = "none", document.getElementById("openButton__label").innerText = `${u}`) : (document.getElementById("myForm").style.display = "none", document.getElementById("openButton__closeIcon").style.display = "none", document.getElementById("openButton__phoneIcon").style.display = "block", document.getElementById("openButton__label").innerText = `${h}`); var Q = await fetch(`https://us-central1-hubspot-api-developer.cloudfunctions.net/wibi-click-api?id=${n}&c=1`); var Y = await Q.json(); }
+        async function F(e) {
+            var target = e.target || e.srcElement,
+                text = target.textContent || target.innerText;
+            var Q = await fetch(`https://us-central1-hubspot-api-developer.cloudfunctions.net/wibi-click-api?id=${n}&c=3&ic=${text}`);
+            var Y = await Q.json();
+        }
 
-        v && v.length, window.location.href.search("#OpenClick2Contact") >= 0 && C(), document.getElementById("openButton").onclick = function() { C() }
+        v && v.length, window.location.href.search("#OpenClick2Contact") >= 0 && C(), document.getElementById("openButton").onclick = function() { C() }, document.querySelector(".click2Chat div#divContainer>a").onclick = function(e) { F(e) }
     }()
 }
