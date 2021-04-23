@@ -50,7 +50,7 @@ function createClick2ChatWidget(n) {
         async function C() { "none" == document.getElementById("myForm").style.display ? (document.getElementById("myForm").style.display = "block", document.getElementById("openButton__closeIcon").style.display = "block", document.getElementById("openButton__phoneIcon").style.display = "none", document.getElementById("openButton__label").innerText = `${u}`) : (document.getElementById("myForm").style.display = "none", document.getElementById("openButton__closeIcon").style.display = "none", document.getElementById("openButton__phoneIcon").style.display = "block", document.getElementById("openButton__label").innerText = `${h}`); var Q = await fetch(`https://us-central1-hubspot-api-developer.cloudfunctions.net/wibi-click-api?id=${n}&c=1`); var Y = await Q.json(); }
         async function F(e) {
             var target = e.target || e.srcElement,
-                text = target.textContent || target.innerText;
+                text = target.getAttribute("class") || target.innerText;
             var Q = await fetch(`https://us-central1-hubspot-api-developer.cloudfunctions.net/wibi-click-api?id=${n}&c=3&ic=${text}`);
             var Y = await Q.json();
         }
