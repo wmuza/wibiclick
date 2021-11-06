@@ -57,6 +57,21 @@ function createClick2ChatWidget(n) {
             }
             var Q = await fetch(`https://us-central1-hubspot-api-developer.cloudfunctions.net/wibi-click-api?id=${n}&c=3&ic=${text}`);
             var Y = await Q.json();
+
+            //Hubspot
+            function getCookie(name) { var value = "; " + document.cookie; var parts = value.split("; " + name + "="); if (parts.length == 2) return parts.pop().split(";").shift(); }
+            var contact_utk = getCookie("hubspotutk");
+            var submitted_form = false;
+            window.addEventListener('message', event => { if(event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormSubmit') { submitted_form = true } });
+
+            //Clarity
+            typeof clarity === "undefined" ? "y" : clarity("set", "wibiclick", text) && contact_utk ? clarity("set", "hubspotutk", contact_utk) : "" && submitted_form ? clarity("set", "submitted_form", "yes") : "";
+            
+            //Google Aalytics
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ contactUs: text, event: "wibiclick" });
+            contact_utk ? window.dataLayer.push({ contact_utk: contact_utk, event: "hubspotutk" }) : '';
+            submitted_form ? window.dataLayer.push({ submitted_form: "yes", event: "hubspot", }) : '';
         }
 
         v && v.length, window.location.href.search("#OpenClick2Contact") >= 0 && C(), document.getElementById("openButton").onclick = function() { C() }, document.querySelectorAll('.click2Chat div#divContainer a').forEach(button => button.onclick = function(e) { F(e) })
