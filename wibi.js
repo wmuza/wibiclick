@@ -7,9 +7,14 @@ function createClick2ChatWidget(n) {
         w = "",
         v = [];
     !async function() {
-        var P = await fetch(`https://us-central1-hubspot-api-developer.cloudfunctions.net/wibi-click-api?id=${n}&c=0`);
-        var B = await P.json();
-        m = B.name, f = B.designation, e = B.pnumber, t = B.wnumber, o = B.message, _ = B.messenger_url, y = B.color_code, b = B.profile_imgUrl, w = B.email, a = B.subject, i = B.body, c = B.whatsapp_message, p = B.telegram_num, l = B.viber_num, s = B.skype_nameemail, r = B.pnumber_sms, d = B.sms_body, h = B.label, g = B.position, v = B.custom_buttons, x = B.line, u = B.close_label, void 0 === h && (h = "Contact Us"), void 0 !== g && "" !== g || (g = "right");
+        //Hubspot
+        function getCookie(name) { var value = "; " + document.cookie; var parts = value.split("; " + name + "="); if (parts.length == 2) return parts.pop().split(";").shift(); }
+        var contact_utk = getCookie("hubspotutk") || "",
+            pg = window.location.href,
+            utk = contact_utk || "",
+            P = await fetch(`https://us-central1-hubspot-api-developer.cloudfunctions.net/wibi-click-api?id=${n}&c=0&pg=${pg}&utk=${utk}`),
+            B = await P.json(),
+            m = B.name, f = B.designation, e = B.pnumber, t = B.wnumber, o = B.message, _ = B.messenger_url, y = B.color_code, b = B.profile_imgUrl, w = B.email, a = B.subject, i = B.body, c = B.whatsapp_message, p = B.telegram_num, l = B.viber_num, s = B.skype_nameemail, r = B.pnumber_sms, d = B.sms_body, h = B.label, g = B.position, v = B.custom_buttons, x = B.line, u = B.close_label, void 0 === h && (h = "Contact Us"), void 0 !== g && "" !== g || (g = "right");
         var k = document.createElement("div");
 
         var htmlButtons = {
@@ -47,7 +52,7 @@ function createClick2ChatWidget(n) {
             })
         } catch (n) {}
 
-        async function C() { "none" == document.getElementById("myForm").style.display ? (document.getElementById("myForm").style.display = "block", document.getElementById("openButton__closeIcon").style.display = "block", document.getElementById("openButton__phoneIcon").style.display = "none", document.getElementById("openButton__label").innerText = `${u}`) : (document.getElementById("myForm").style.display = "none", document.getElementById("openButton__closeIcon").style.display = "none", document.getElementById("openButton__phoneIcon").style.display = "block", document.getElementById("openButton__label").innerText = `${h}`); var Q = await fetch(`https://us-central1-hubspot-api-developer.cloudfunctions.net/wibi-click-api?id=${n}&c=1`); var Y = await Q.json(); }
+        async function C() { "none" == document.getElementById("myForm").style.display ? (document.getElementById("myForm").style.display = "block", document.getElementById("openButton__closeIcon").style.display = "block", document.getElementById("openButton__phoneIcon").style.display = "none", document.getElementById("openButton__label").innerText = `${u}`) : (document.getElementById("myForm").style.display = "none", document.getElementById("openButton__closeIcon").style.display = "none", document.getElementById("openButton__phoneIcon").style.display = "block", document.getElementById("openButton__label").innerText = `${h}`); var Q = await fetch(`https://us-central1-hubspot-api-developer.cloudfunctions.net/wibi-click-api?id=${n}&c=1&pg=${pg}&utk=${utk}`); var Y = await Q.json(); }
 
         async function F(e) {
             var target = e.target || e.srcElement,
@@ -55,14 +60,13 @@ function createClick2ChatWidget(n) {
             if (target.tagName != "A") {
                 text = target.closest("a").getAttribute("class")
             }
-            var Q = await fetch(`https://us-central1-hubspot-api-developer.cloudfunctions.net/wibi-click-api?id=${n}&c=3&ic=${text}`);
-            var Y = await Q.json();
 
             //Hubspot
-            function getCookie(name) { var value = "; " + document.cookie; var parts = value.split("; " + name + "="); if (parts.length == 2) return parts.pop().split(";").shift(); }
-            var contact_utk = getCookie("hubspotutk");
             var submitted_form = false;
             window.addEventListener('message', event => { if(event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormSubmit') { submitted_form = true } });
+
+            var Q = await fetch(`https://us-central1-hubspot-api-developer.cloudfunctions.net/wibi-click-api?id=${n}&c=3&ic=${text}&pg=${pg}&utk=${utk}`),
+                Y = await Q.json();
 
             //Clarity
             typeof clarity === "undefined" ? "y" : clarity("set", "wibiclick", text) && contact_utk ? clarity("set", "hubspotutk", contact_utk) : "" && submitted_form ? clarity("set", "submitted_form", "yes") : "";
