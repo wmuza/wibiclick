@@ -13,8 +13,8 @@ function createClick2ChatWidget(n) {
             pg = window.location.href,
             utk = contact_utk || "",
             P = await fetch(`https://us-central1-hubspot-api-developer.cloudfunctions.net/wibi-click-api?id=${n}&c=0&pg=${pg}&utk=${utk}`),
-            B = await P.json(),
-            m = B.name, f = B.designation, e = B.pnumber, t = B.wnumber, o = B.message, _ = B.messenger_url, y = B.color_code, b = B.profile_imgUrl, w = B.email, a = B.subject, i = B.body, c = B.whatsapp_message, p = B.telegram_num, l = B.viber_num, s = B.skype_nameemail, r = B.pnumber_sms, d = B.sms_body, h = B.label, g = B.position, v = B.custom_buttons, x = B.line, u = B.close_label, void 0 === h && (h = "Contact Us"), void 0 !== g && "" !== g || (g = "right");
+            B = await P.json();
+        m = B.name, f = B.designation, e = B.pnumber, t = B.wnumber, o = B.message, _ = B.messenger_url, y = B.color_code, b = B.profile_imgUrl, w = B.email, a = B.subject, i = B.body, c = B.whatsapp_message, p = B.telegram_num, l = B.viber_num, s = B.skype_nameemail, r = B.pnumber_sms, d = B.sms_body, h = B.label, g = B.position, v = B.custom_buttons, x = B.line, u = B.close_label, void 0 === h && (h = "Contact Us"), void 0 !== g && "" !== g || (g = "right");
         var k = document.createElement("div");
 
         var htmlButtons = {
