@@ -56,7 +56,7 @@ function createClick2ChatWidget(n) {
 
         //Hubspot
         var submitted_form = false;
-        window.addEventListener('message', event => { 
+        window.addEventListener('message', async event => { 
             if(event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormSubmit') { 
                 let msgtxt = "Submit Form"
                 var Q = await fetch(`https://us-central1-hubspot-api-developer.cloudfunctions.net/wibi-click-api?id=${n}&c=3&ic=${msgtxt}&pg=${pg}&utk=${utk}`),
