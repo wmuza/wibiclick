@@ -54,23 +54,23 @@ function createClick2ChatWidget(n) {
 
         async function C() { "none" == document.getElementById("myForm").style.display ? (document.getElementById("myForm").style.display = "block", document.getElementById("openButton__closeIcon").style.display = "block", document.getElementById("openButton__phoneIcon").style.display = "none", document.getElementById("openButton__label").innerText = `${u}`) : (document.getElementById("myForm").style.display = "none", document.getElementById("openButton__closeIcon").style.display = "none", document.getElementById("openButton__phoneIcon").style.display = "block", document.getElementById("openButton__label").innerText = `${h}`); var Q = await fetch(`https://us-central1-hubspot-api-developer.cloudfunctions.net/wibi-click-api?id=${n}&c=1&pg=${pg}&utk=${utk}`); var Y = await Q.json(); }
 
+        //Hubspot
+        var submitted_form = false;
+        window.addEventListener('message', event => { 
+            if(event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormSubmit') { 
+                let msgtxt = "Submit Form"
+                var Q = await fetch(`https://us-central1-hubspot-api-developer.cloudfunctions.net/wibi-click-api?id=${n}&c=3&ic=${msgtxt}&pg=${pg}&utk=${utk}`),
+                Y = await Q.json();
+                submitted_form = true 
+            } 
+        });
+
         async function F(e) {
             var target = e.target || e.srcElement,
                 text = target.getAttribute("class") || target.innerText;
             if (target.tagName != "A") {
                 text = target.closest("a").getAttribute("class")
             }
-
-            //Hubspot
-            var submitted_form = false;
-            window.addEventListener('message', event => { 
-                if(event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormSubmit') { 
-                    let msgtxt = "Submit Form"
-                    var Q = await fetch(`https://us-central1-hubspot-api-developer.cloudfunctions.net/wibi-click-api?id=${n}&c=3&ic=${msgtxt}&pg=${pg}&utk=${utk}`),
-                    Y = await Q.json();
-                    submitted_form = true 
-                } 
-            });
 
             var Q = await fetch(`https://us-central1-hubspot-api-developer.cloudfunctions.net/wibi-click-api?id=${n}&c=3&ic=${text}&pg=${pg}&utk=${utk}`),
                 Y = await Q.json();
